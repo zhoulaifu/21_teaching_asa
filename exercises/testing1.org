@@ -1,0 +1,45 @@
+*  Exercise 1  
+Consider the following program
+
+#+BEGIN_SRC c
+void foo(int x, int y){
+if (x == y) abort();
+else printf("okay\n");
+}
+#+END_SRC
+
+Assuming that "x" and "y" are 32-bit integers, what would be the
+probability that random inputs trigger "abort"?
+
+** Exercise 2
+Consider this program below:
+#+BEGIN_SRC c
+void foo (double x) {
+if (x <= 1.0) x++;
+double y = x * x;
+if (y < 4.0) x--;
+}
+#+END_SRC
+
+1. Draw a control flow graph from this program.
+2. Enumerate all its branches.
+3. Find a set of inputs that trigger all the branches.
+4. Enumerate all its paths.
+5. Find a set of inputs that trigger all the paths.
+
+
+* Mini-project
+
+In this mini-project, we will set up and use Google's fuzzing tool AFL
+(https://github.com/google/AFL) to automatically detect bugs in a
+small yet nontrivial C program. Detailed instructions on how to
+install/use AFL are deliberately left out.
+
+- First, set up and install AFL. You can do in your own way, use the minimal settigs here that worked for me:
+  https://github.com/zhoulaifu/hello_afl.
+- Then, try AFL with the "vulnerable.c"" program that you can download
+  from
+  https://github.com/mykter/afl-training/blob/master/quickstart/vulnerable.c
+  Compile and play around with the program to see what it does.
+- The program above is known to be buggy. Use AFL to fuzz it and find three different inputs for vulnerable.c
+that can trigger crashes.
