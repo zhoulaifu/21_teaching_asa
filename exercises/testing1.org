@@ -43,3 +43,7 @@ install/use AFL are deliberately left out.
   Compile and play around with the program to see what it does.
 - The program above is known to be buggy. Use AFL to fuzz it and find three different inputs for vulnerable.c
 that can trigger crashes.
+- (Optional) measure the code coverage with gcov, and visualize the results with lcov (https://medium.com/@naveen.maltesh/generating-code-coverage-report-using-gnu-gcov-lcov-ee54a4de3f11)
+  - Hint: use "cat <fileName> | <runnerName>" to run a program with standard inputs provided from a file
+
+ 
