@@ -1,0 +1,74 @@
+* Mini-Project: Testing Robot Operating System with compiler sanitizers 
+
+Suppose that you now work with ROS-Consortium (https://rosindustrial.org/ric-eu) on their code quality assurance.  They want you to test legacy code of their library geometry2 (https://github.com/ros2/geometry2) that is of utmost importance for them.  What can you do?
+
+- For this miniproject, you consider the legacy code being the branch in the ROS foxy distribution. Get the source code of geometry2.  
+
+- Get ROS foxy installed on your (Virtual) OS.
+
+  + Hint: use provided Dockerfile
+
+- Perhaps, the first thing to do for quality assurance is to compile the package.
+
+  Hint: https://docs.ros.org/en/foxy/Tutorials/Colcon-Tutorial.html/. After building, you will get something like "Summary: 14 packages finished [1min 6s]". 
+
+- The second thing to do should be unit test.
+
+  + Hint: Same link above. Search "run test". You will get something like "Summary: 14 packages finished [2.63s]".
+
+- Perhaps no bugs are found so far. What can use do next?  Sanitizers come to rescue here. Use sanitizers.
+
+  + Hint: (1) Recompoie. I used  VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-error" colcon build --event-handlers console_direct+"; and then (2)  colcon test.  You should get something like   " 3 packages had test failures: test_tf2 tf2_py tf2_ros"
+
+- Hunt down the bug, producing a table like this;
+
+  | Buggy ROS packages | Binary (to reproduce the bug) | Sanitizers (to trap the bug) |
+  |--------------------+-------------------------------+------------------------------|
+  |                    |                               |                              |
+
+  + Hint: binaries of specific package is in the ./build folder
+
+  + Hint: I got something like this
+
+  | ROS-package | Binary                       | Sanitizer         |
+  |-------------+------------------------------+-------------------|
+  | tf2_ros     | tf2_ros/tf2_monitor          | AddressSanitizer: |
+  | test_tf2    | test_tf2/test_message_filter | AddressSanitizer  |
+  |             |                              |                   |
+
+
+
+* Mini-project:  Fuzzing the GNU Scientific Library  (GSL)
+
+Warning: Reseach-y! 
+  
+You now want to know how reliable  the open-source GSL project is, because the code is widely used, even in safety-critical department like CERN.  You will use Google's fuzzing tool to do so. 
+
+
+- Set up a Linux-like environment that has gcc, flex, make installed. 
+
+  + Hint: Use Dockerfile from repo/Lecture2_testing/MiniProject2_GSL: "make build_docker" to build the docker image; "make run_docker" to start using the Linux environment. 
+
+
+- Get source code GNU Scientific Library version 2.5.
+
+- Get list of files that has decimal decimal floating-point numbers (such as 3.14) and a main program. Double check if statsort.c in one of the files you found.
+
+  + Hint: You can use this regular expression to get FP decimals: "[0-9]*\.[0-9]+"
+  + Hint: You will get about 106 Results in total, and 63 from doc/examples. 
+
+- Now, work with statsort.c. Does it have main? Does it iteract with GSL? Does it take input from stdin?
+
+-  Manually transform statsort.c so it becomes a fuzz driver.
+
+  + Hint:  Check your result with the one produced by main_tool: "LANG_LEX=c ../shaping/main_tool < ../gsl-2.5/doc/examples/stat.c > stat_shape.c"
+
+- Fuzz with the newly transformed statsort.c.
+
+  + Hint: You need to compile GSL with CC=afl-gcc
+  + Hint: You also need to compile and link statsort.c with GSL libraries https://www.gnu.org/software/gsl/doc/html/usage.html 
+
+  + Hint: In the end, you should find more than one way to make GSL fail. See https://savannah.gnu.org/bugs/index.php#comment0 for a security-related buffer overflow reported in this way. 
+
+      
+     
