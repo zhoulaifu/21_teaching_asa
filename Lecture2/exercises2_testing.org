@@ -1,4 +1,4 @@
-* Mini-Project: Testing Robot Operating System with compiler sanitizers 
+* Mini-Project 1: Testing Robot Operating System with compiler sanitizers 
 
 Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-eu).You are asked to assure quality of legacy code of ROS2 library geometry2 (https://github.com/ros2/geometry2) that is of utmost importance for them.  What can you do?
 
@@ -33,7 +33,7 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
   | Buggy ROS packages | Binary (to reproduce the bug) | Sanitizers (used to trap the bug) |
   |--------------------+-------------------------------+-----------------------------------|
-  |                    |                               |                                   |
+  | ...                | ...                           | ...                               |
 
   + Hint: binaries of specific package is in the /opt/ros_ws/build folder
 
@@ -47,7 +47,7 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
 
 
-* Mini-project:  Fuzzing the GNU Scientific Library  (GSL)
+* Mini-project 2:  Fuzzing the GNU Scientific Library  (GSL)
 
 Warning: Reseach-y ahead! 
   
