@@ -1,40 +1,49 @@
 * Mini-Project: Testing Robot Operating System with compiler sanitizers 
 
-Suppose that you now work with ROS-Consortium (https://rosindustrial.org/ric-eu) on their code quality assurance.  They want you to test legacy code of their library geometry2 (https://github.com/ros2/geometry2) that is of utmost importance for them.  What can you do?
+Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-eu).You are asked to assure quality of legacy code of ROS2 library geometry2 (https://github.com/ros2/geometry2) that is of utmost importance for them.  What can you do?
 
-- For this miniproject, you consider the legacy code being the branch in the ROS foxy distribution. Get the source code of geometry2.  
+- For this miniproject, you consider the legacy code being the branch in the ROS foxy distribution. Get the source code of geometry2. Following ROS directory reqquirement, put code to /opt/ros2_ws/src.
 
-- Get ROS foxy installed on your (Virtual) OS.
+  
+- Install ROS foxy distro  on your (Virtual) OS.  At this point, "ros2 --help" should work, and the command "tree /opt -L 2" produces
 
-  + Hint: use provided Dockerfile
+#+begin_src text    
+/opt
+├── ros
+│   └── foxy
+└── ros_ws
+    └── src
+#+end_src
 
-- Perhaps, the first thing to do for quality assurance is to compile the package.
+  + Hint: Might be doable with official installation guide (https://docs.ros.org/en/foxy/Installation.html). But I think using provided Dockerfile in the repo would be much easier. 
+
+- Perhaps the first quality assurance step is to compile the package.
 
   Hint: https://docs.ros.org/en/foxy/Tutorials/Colcon-Tutorial.html/. After building, you will get something like "Summary: 14 packages finished [1min 6s]". 
 
 - The second thing to do should be unit test.
 
-  + Hint: Same link above. Search "run test". You will get something like "Summary: 14 packages finished [2.63s]".
+  + Hint: Same info link above. 
 
-- Perhaps no bugs are found so far. What can use do next?  Sanitizers come to rescue here. Use sanitizers.
+- Perhaps no bugs are found so far. Continue testing with sanitizers.
 
-  + Hint: (1) Recompoie. I used  VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-error" colcon build --event-handlers console_direct+"; and then (2)  colcon test.  You should get something like   " 3 packages had test failures: test_tf2 tf2_py tf2_ros"
+  + Hint: (1) Recompile. I used  VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-error" colcon build --event-handlers console_direct+"; and then (2)colcon test.  You should get something like   "3 packages had test failures: test_tf2 tf2_py tf2_ros"
 
-- Hunt down the bug, producing a table like this;
+- Hunt down the bug. Try to come up with a table like this in the end, which would provide essential info for developers to reproduce the errors.
 
-  | Buggy ROS packages | Binary (to reproduce the bug) | Sanitizers (to trap the bug) |
-  |--------------------+-------------------------------+------------------------------|
-  |                    |                               |                              |
+  | Buggy ROS packages | Binary (to reproduce the bug) | Sanitizers (used to trap the bug) |
+  |--------------------+-------------------------------+-----------------------------------|
+  |                    |                               |                                   |
 
-  + Hint: binaries of specific package is in the ./build folder
+  + Hint: binaries of specific package is in the /opt/ros_ws/build folder
 
   + Hint: I got something like this
 
-  | ROS-package | Binary                       | Sanitizer         |
-  |-------------+------------------------------+-------------------|
-  | tf2_ros     | tf2_ros/tf2_monitor          | AddressSanitizer: |
-  | test_tf2    | test_tf2/test_message_filter | AddressSanitizer  |
-  |             |                              |                   |
+  | ROS-package | Binary                       | Sanitizer        |
+  |-------------+------------------------------+------------------|
+  | tf2_ros     | tf2_ros/tf2_monitor          | AddressSanitizer |
+  | test_tf2    | test_tf2/test_message_filter | AddressSanitizer |
+  |             |                              |                  |
 
 
 
