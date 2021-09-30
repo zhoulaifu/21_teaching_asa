@@ -84,9 +84,9 @@ You now want to know check reliability of the open-source GSL. It is an importan
 
 - Fuzz with the newly transformed code, say statsort_shape.c. Interpret your findings.
 
-  + Hint: You will need to compile GSL with "make CC=afl-gcc", and perhaps install it with "make install". 
-  + Hint: You will compilie and link statsort.c with generated GSL libraries https://www.gnu.org/software/gsl/doc/html/usage.html.
-
+  + Hint: You will need to compile and install GSL with "./configure; make CC=afl-gcc; make install". 
+  + Hint: You will compilie and link statsort.c with generated GSL libraries https://www.gnu.org/software/gsl/doc/html/usage.html. I use the following command line: "afl-gcc -L/usr/local/lib/ statsort_shape.c -lgsl -lgslcblas -lm", in which -L specifies the search path for C libraries, -l specifies the library names.
+  + Hint: You may run AFL with this command: "LD_LIBRARY_PATH=/usr/local/lib afl-fuzz -i in/ -o out/ ./a.out". The "LD_LIBRARY_PATH" part specifies the search path of C libraries used at run-time ("-L" used earlier specifies compile-time search paths).  
   + Hint: In the end, AFL should find more than one way to make GSL fail. See https://savannah.gnu.org/bugs/index.php#comment0 for a security-related buffer overflow reported in this way. See the picture below to  get  an idea of the timestamp of the bugs I found. 
 
 [[./fig/statsort_bug_timestamp.png]]     
