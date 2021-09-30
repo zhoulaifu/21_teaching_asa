@@ -13,8 +13,7 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 └── ros_ws
     └── src
 #+end_src
-
-  + Hint: Might be doable with official installation guide (https://docs.ros.org/en/foxy/Installation.html). But I think using provided Dockerfile in the repo would be much easier. 
+  + Hint: Use the provided Dockerfile in resource/  would be easier than installing ROS from scratch (https://docs.ros.org/en/foxy/Installation.html). 
 
 -  Get the source code of geometry2. Following ROS directory requirement, put code to /opt/ros2_ws/src.
 
