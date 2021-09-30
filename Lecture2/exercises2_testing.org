@@ -58,9 +58,14 @@ VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-e
 
 * Mini-project 2:  Fuzzing the GNU Scientific Library  (GSL)
 
-Warning: Reseach-y contents ahead! 
+Warning: Reseach-y contents ahead! Knowing the following, on linking and compilation in C, will help build the software in this miniproject
+
+
+   - The standard way to compile a C Makefile project is " ./configure; make; make install".
+   - We use "-L" and "-l" to specify the paths and library names of libraries that are linked at compile time.
+   - We specify the environment LD_LIBRARY_PATH for the path of libraries that are used at run-time.
   
-You now want to know check reliability of the open-source GSL. It is an important problem  as GSL is widely used, even in safety-critical sectors like CERN.  You will use Google's AFL to fuzz GSL.
+You now want to check reliability of the open-source GSL. It is an important problem  as GSL is widely used, even in safety-critical sectors like CERN.  You will use Google's AFL to fuzz GSL.
 
 
 - Set up a Linux-like environment that has gcc, flex, make installed. 
