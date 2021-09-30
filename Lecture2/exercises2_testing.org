@@ -80,7 +80,7 @@ You now want to know check reliability of the open-source GSL. It is an importan
 - Manually transform statsort.c so that it becomes a fuzz driver.
 
   + Hint: You can use "scanf" to get inputs from stdin 
-  + Hint:  Check your result with a fuzz driver transformer "main_tool" written from a lexer. First compile the lexer: "cd shaping && make main_tool". Then do the transformation work:  "LANG_LEX=c ../shaping/main_tool < ../gsl-2.5/doc/examples/stat.c > stat_shape.c", where "main_tool" has to be compiled first 
+  + Hint:  Check your result with a fuzz driver transformer "main_tool" written from a lexer. First compile the lexer: "cd shaping && make main_tool". Then do the transformation work:  "LANG_LEX=c ../shaping/main_tool < ../gsl-2.5/doc/examples/stat.c > stat_shape.c", where "main_tool" has to be compiled first. 
 
 - Fuzz with the newly transformed code, say statsort_shape.c. Interpret your findings.
 
