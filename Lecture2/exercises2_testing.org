@@ -4,7 +4,7 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
 
   
-- For this miniproject, you consider the ROS environment for the legacy code being the ROS foxy distribution.   Install ROS foxy distro  on your (Virtual) OS.  At this point, "ros2 --help" should work, and the command "tree /opt -L 2" produces
+- For this miniproject, you consider the ROS environment for the legacy code being the ROS foxy distribution.   Install ROS foxy distro  on your (Virtual) OS.   Use the provided Dockerfile in resource/  would be easier than installing ROS from scratch (https://docs.ros.org/en/foxy/Installation.html). After installation, "ros2 --help" should work, and the command "tree /opt -L 2" produces
 
 #+begin_src text    
 /opt
@@ -13,9 +13,9 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 └── ros_ws
     └── src
 #+end_src
-  + Hint: Use the provided Dockerfile in resource/  would be easier than installing ROS from scratch (https://docs.ros.org/en/foxy/Installation.html). 
 
--  Get the source code of geometry2. Following ROS directory requirement, put code to /opt/ros2_ws/src.
+
+-  Get the source code for geometry2. Following ROS directory requirement, put code to /opt/ros2_ws/src.
 
   + Hint: Clone the ros2:foxy branch of geometry2.
     
