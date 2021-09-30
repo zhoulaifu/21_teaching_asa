@@ -30,7 +30,7 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
 - Perhaps no bugs are found so far. Continue testing with sanitizers.
 
-  + Hint: First, recompile and then "colcon test".  You could get something like  "3 packages had test failures: test_tf2 tf2_py tf2_ros". I used the command below to recompile geometry2.
+  + Hint: First, recompile and then "colcon test".  You may get something like  "3 packages had test failures: test_tf2 tf2_py tf2_ros". I used the command below to recompile geometry2.
 
 #+BEGIN_SRC shell 
 VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-error" colcon build --event-handlers console_direct+
