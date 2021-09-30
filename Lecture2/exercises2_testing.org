@@ -30,7 +30,13 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
 - Perhaps no bugs are found so far. Continue testing with sanitizers.
 
-  + Hint: (1) Recompile. I used  VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-error" colcon build --event-handlers console_direct+"; and then (2)colcon test.  You should get something like   "3 packages had test failures: test_tf2 tf2_py tf2_ros"
+  + Hint: First, recompile and then "colcon test".  You could get something like  "3 packages had test failures: test_tf2 tf2_py tf2_ros". I used the command below to recompile geometry2.
+
+#+BEGIN_SRC shell 
+VERBOSE=1  CXXFLAGS="-fsanitize=address,undefined -fsanitize-undefined-trap-on-error" colcon build --event-handlers console_direct+
+#+END_SRC
+
+ 
 
 - Hunt down the bug. Try to come up with a table like this in the end, which would provide essential info for developers to reproduce the errors.
 
