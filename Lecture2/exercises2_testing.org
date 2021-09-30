@@ -2,10 +2,9 @@
 
 Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-eu).You are asked to assure quality of legacy code of ROS2 library geometry2 (https://github.com/ros2/geometry2) that is of utmost importance for them.  What can you do?
 
-- For this miniproject, you consider the legacy code being the branch in the ROS foxy distribution. Get the source code of geometry2. Following ROS directory reqquirement, put code to /opt/ros2_ws/src.
 
   
-- Install ROS foxy distro  on your (Virtual) OS.  At this point, "ros2 --help" should work, and the command "tree /opt -L 2" produces
+- For this miniproject, you consider the ROS environment for the legacy code being the ROS foxy distribution.   Install ROS foxy distro  on your (Virtual) OS.  At this point, "ros2 --help" should work, and the command "tree /opt -L 2" produces
 
 #+begin_src text    
 /opt
@@ -17,6 +16,11 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
   + Hint: Might be doable with official installation guide (https://docs.ros.org/en/foxy/Installation.html). But I think using provided Dockerfile in the repo would be much easier. 
 
+-  Get the source code of geometry2. Following ROS directory requirement, put code to /opt/ros2_ws/src.
+
+  + Hint: Clone the ros2:foxy branch of geometry2.
+    
+  
 - Perhaps the first quality assurance step is to compile the package.
 
   Hint: https://docs.ros.org/en/foxy/Tutorials/Colcon-Tutorial.html/. After building, you will get something like "Summary: 14 packages finished [1min 6s]". 
