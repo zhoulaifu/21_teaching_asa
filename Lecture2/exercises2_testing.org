@@ -34,9 +34,9 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
 
 - Hunt down the bug. Try to come up with a table like this in the end, which would provide essential info for developers to reproduce the errors.
 
-  | Buggy ROS packages | Binary (to reproduce the bug) | Sanitizers (used to trap the bug) |
-  |--------------------+-------------------------------+-----------------------------------|
-  | ...                | ...                           | ...                               |
+  | ROS packages (that are buggy) | Binary (to reproduce the bug) | Sanitizers (used to trap the bug) |
+  |-------------------------------+-------------------------------+-----------------------------------|
+  | ...                           | ...                           | ...                               |
 
   + Hint: binaries of specific package is in the /opt/ros_ws/build folder
 
