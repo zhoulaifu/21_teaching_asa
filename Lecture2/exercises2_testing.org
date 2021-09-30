@@ -22,7 +22,7 @@ Suppose that you are working with ROS-Consortium (https://rosindustrial.org/ric-
   
 - Perhaps the first quality assurance step is to compile the package.
 
-  Hint: https://docs.ros.org/en/foxy/Tutorials/Colcon-Tutorial.html/. After building, you will get something like "Summary: 14 packages finished [1min 6s]". 
+  Hint: https://docs.ros.org/en/foxy/Tutorials/Colcon-Tutorial.html. After building, you will get something like "Summary: 14 packages finished [1min 6s]". 
 
 - The second thing to do should be unit test.
 
