@@ -2,11 +2,10 @@
 (CREDIT: exo adapted from
 https://moves.rwth-aachen.de/wp-content/uploads/WS1415/SPA14/ex/e9.pdf)
 
-Consider the Reaching Definitions Analysis (RDA). Given a labeled
-WHILE-program, this analysis computes for every program location and
-every variable all other program locations in which the variable might
-have been most recently written (i.e. written without being re-written
-in between). As an example, consider the following program.
+Consider the Reaching Definitions Analysis (RDA). For every program location and
+every variable, the analysis computes all other program locations in which the variable might
+have reached without being re-written. As an example, consider the
+following program.
 
 #+BEGIN_SRC
 l1  x := 2;
@@ -15,15 +14,12 @@ l3  while y < 10
 l4       y := y + 1;
 l5  x := y * 2;
 #+END_SRC
-(x, l2) is a reaching definition at label l4, because there is a path
-reaching label l4 such that x is most recently written at label l2. On
-the other hand (x, l1) is not a reaching definition at label l4. If
+Program location l4 is reached by (x, l2) but not (x, l1).  If
 the most recent definition of a variable is “before the program”, this
-is indicated by a question mark as the label information. For example,
-for label l4 we have the reaching definitions {(y, l4), (y, ?), (x,
+is indicated by a question mark as the label information. In this case, l4 has the reaching definitions {(y, l4), (y, ?), (x,
 l2)}.
 
-Have understood this, try to manually analyze the program below:
+This exercise is to  analyze the program below manually. 
 
 #+BEGIN_SRC
 l1  x := 2;
@@ -33,7 +29,7 @@ l4       y := y + x;
 l5  x := y;
 #+END_SRC
 
-Assume "x" and "y" are initialized before the code. Your analysis should produce a table like this:
+We assume "x" and "y" are initialized before the code segment. Your analysis should produce a table like this:
 
 | label | reaching definitions |
 |-------+----------------------|
@@ -41,7 +37,7 @@ Assume "x" and "y" are initialized before the code. Your analysis should produce
 |     2 | to fill              |
 |     3 | to fill              |
 |     4 | to fill              |
-|     5 | to fill                  |
+|     5 | to fill              |
 
 
 Hint: Try to first produce a sound analysis. Then try to refine it.
@@ -63,8 +59,8 @@ Concrete Semantics:
 2. Assume that x = 1 at l1, describe the trace of states that
    follow. Your output should be a (finite or infinite) sequence of
    (l,x) where l is the label, x is the value .
-3. Based your analysis from 2, what is the value of x when l3 is
-   reached in the 30th time?
+3. Based on your analysis from 2, what is the value of x when l3 is
+   reached at the 30th time?
 4. Now, Assume the variable x can be any positive integer at l1.
    Calculate the set of all possible traces at l1-4. This task can be
    tedious (in particular because the way we express the trace is
@@ -82,7 +78,7 @@ Concrete Semantics:
 
 Abstract Semantics:
 
-5. We now consider an abstract semantics. This one is called prefix
+5. We consider an abstract semantics. It is also known as the prefix
    trace semantics, meaning that we use a prefix of a trace to
    represent a set of traces (finite, or infinite).
 
@@ -96,7 +92,7 @@ Abstract Semantics:
    X2, X3, X4) where each X_i is a set of integers.
 
 7. There is information lost in the result obtained in the collecting
-   semantics, compared with that of the trace semantics. Please give a
+   semantics, compared with that of the trace semantics. Try to provide a
    property that can be shown in the trace semantics, but not in the
    collecting semantics.
 
