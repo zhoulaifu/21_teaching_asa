@@ -16,7 +16,7 @@ l5  x := y * 2;
 #+END_SRC
 Program location l4 is reached by (x, l2) but not (x, l1).  If
 the most recent definition of a variable is “before the program”, this
-is indicated by a question mark as the label information. In this case, l4 has the reaching definitions {(y, l4), (y, ?), (x,
+is indicated by a question mark as the label information. In this case, l5 has the reaching definitions {(y, l4), (y, ?), (x,
 l2)}.
 
 This exercise is to  analyze the program below manually. 
