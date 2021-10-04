@@ -14,10 +14,10 @@ l3  while y < 10
 l4       y := y + 1;
 l5  x := y * 2;
 #+END_SRC
-Program location l4 is reached by (x, l2) but not (x, l1).  If
-the most recent definition of a variable is “before the program”, this
-is indicated by a question mark as the label information. In this case, l5 has the reaching definitions {(y, l4), (y, ?), (x,
-l2)}.
+Program location l4 is reached by (x, l2) but not (x, l1).  If the
+most recent definition of a variable is “before the program”, this is
+indicated by a question mark as the label information. In this case,
+l5 has the reaching definitions {(y, l4), (y, ?), (x, l2)}.
 
 This exercise is to  analyze the program below manually. 
 
@@ -31,14 +31,17 @@ l5  x := y;
 
 We assume "x" and "y" are initialized before the code segment. Your analysis should produce a table like this:
 
-| label | reaching definitions |
-|-------+----------------------|
-|     1 | (x,?), (y,?)         |
-|     2 | to fill              |
-|     3 | to fill              |
-|     4 | to fill              |
-|     5 | to fill              |
-
+#+BEGIN_COMMENT
+Answer to exo above
+| label | reaching definitions   | more precisely |
+|-------+------------------------+----------------|
+|     1 | (x,?), (y,?)           | same           |
+|     2 | (x,l1), (y,?)          | same           |
+|     3 | (x,l1), (y,l2), (y,l4) | (x,l1), (y,l2) |
+|     4 | (x,l1), (y,l2), (y,l4) | emptyset       |
+|     5 | (x,l1), (y,l2), (y,l4) | (x,l1), (y,l2) |
+|       |                        |                |
+#+END_COMMENT
 
 Hint: Try to first produce a sound analysis. Then try to refine it.
 
@@ -55,13 +58,20 @@ l4 return x;}
 
 Concrete Semantics:
 
-1. What would be the possible values of "x" at l4?
+1. What would be the possible values of "x" at l4.
+   # any integer in the interval of [100, max_int]
 2. Assume that x = 1 at l1, describe the trace of states that
    follow. Your output should be a (finite or infinite) sequence of
-   (l,x) where l is the label, x is the value .
+   (l,x) where l is the label, x is the value.
+
+# (l1,1),(l2,1), (l3,2), (l1,2), (l2,2), (l3,3) ... (l_n, n), (l_n+1,n), (l_n+2, n+1),
+
+
+   
 3. Based on your analysis from 2, what is the value of x when l3 is
    reached at the 30th time?
-4. Now, Assume the variable x can be any positive integer at l1.
+   
+4. Now, Assume the variable x can be any _positive_ integer at l1.
    Calculate the set of all possible traces at l1-4. This task can be
    tedious (in particular because the way we express the trace is
    unclear).
@@ -85,11 +95,34 @@ Abstract Semantics:
    Consider a maximum bound of 3. What would be the possible prefix
    traces?
 
+
+| control point | trace1 | trace2 | trace3 |
+| l1            |      1 |      2 |      3 |
+| l2            |      1 |      2 |      3 |
+| l3            |      2 |      3 |      4 |
+|---------------+--------+--------+--------|
+| l4            |        |        |        |
+| l1            |      2 |        |        |
+| l2            |      2 |        |        |
+| l3            |      3 |        |        |
+| ...           |        |        |        |
+| l1            |     99 |        |        |
+| l2            |     99 |        |        |
+| l3            |    100 |        |        |
+| l1            |    100 |        |        |
+| l4            |    100 |        |        |
+
 6. We now consider another abstract semantics. This one is called
    collecting semantics. For each label l1-4, we collect the possible
    values of x for all its possible traces. What is your collecting
    semantics? Your result should be formulated as a tuple like (X1,
    X2, X3, X4) where each X_i is a set of integers.
+
+| X1 | 1,2,3,...100,...int_max |
+| X2 | 1,2,3 ...99             |
+| X3 | 2,3, 100                |
+| X4 | 100,...int_max          |
+|    |                         |
 
 7. There is information lost in the result obtained in the collecting
    semantics, compared with that of the trace semantics. Try to provide a
@@ -102,12 +135,12 @@ Abstract Semantics:
 9. Let X1, X2, X3, and X4 denote the set representing the possible
    values of "x" when lines l1, l2, l3, and l4 respecively, are
    reached.  Assuming that "x" can be any positive integer immediately
-   before l1 is reached. Write an invariant equation involving X1, X2,
-   X3 and X4.
+   before l1 is reached. Write an invariant fixpoint equation
+   involving X1, X2, X3 and X4.
 
    #  X1 = X3 U {1,...max_int}
-   #  X2 = X1 \cap {<100}
-   #  X3 = X1 + 1
+   #  X2 = X1 \cap (intersection) {<100}
+   #  X3 = X2 + 1
    #  X4 = X1 \cap {x >=100}
 
 
