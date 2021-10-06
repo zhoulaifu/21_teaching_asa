@@ -1,0 +1,108 @@
+* Exercise 1.
+Exercise 2 of https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
+
+* Exercise 2.
+Let S be the set of strings over a (finite) alphabet Σ. An abstraction
+of the string is the set of characters/symbols of which the string is
+built. Example: Program analysis is abstracted by {P,r,o,g,a,m, ’
+’,n,l,y,s,i}. 
+
+Specify the Galois connection, including the concrete domain, abstract
+domain, abstraction function, concretization function. Explain why It
+is indeed a Galois connection.
+
+Exercise adapted from
+https://proglang.informatik.uni-freiburg.de/teaching/programanalysis/2014ss/ex09.pdf)
+
+Exercise 3.
+Consider this program
+
+#+BEGIN_SRC 
+proc incr (x:int) returns (y:int)
+begin
+  y = x+1;
+end
+
+var i:int;
+begin
+  i = random;
+  j = i;
+  while (i<=10) do
+    i = incr(i);
+    j = incr(j);
+  done;
+end
+#+END_SRC 
+- What would be the possible values of "j" at the end of the program?
+- What would be the analysis of an interval analysis?
+- Validate your results on the web. 
+
+* Exercise 3
+
+Consider the program
+#+BEGIN_SRC
+   int x = read_an_integer_from_stdin();
+l1 while (x < 100){
+l2    x++;
+l3 }
+l4 return x;}
+#+END_SRC
+
+1. Let X1, X2, X3, and X4 denote the set representing the possible
+   values of "x" when lines l1, l2, l3, and l4 respecively, are
+   reached.  (a) Write an fixpoint equation involving X1, X2,
+   X3 and X4. (b) Find a solution to the equation
+
+2. Let X1-4 represent interval that contains possible values of "x" at l1-4. Write up the fixpoint equation, find a solution  by iterating from empty intervals.   How many iterations do you need?
+   #  X1 = X3 U {1,...max_int}
+   #  X2 = X1 \cap {<100}
+   #  X3 = X1 + 1
+   #  X4 = X1 \cap {x >=100}
+
+
+# My proposed solutions
+# 1.    a value equal or larger than 100.
+# 2.
+#   (l1,1), (l2,1), (l3,2), (l1,2), (l2,2), (l2,3),...
+#   When (l1) is reached the 30th time, we have (l1, 10), (l2, 10), and (l3, 11)
+# 3.
+#  When (l1) is reached the 30th time, we have (l1, 30), (l2, 30), and
+#  (l3, 31)
+
+
+# 5.
+#+BEGIN_COMMENT
+| l1 | n (for n<100) |   | ... |  99 |     |
+| l2 | n             |   | ... |  99 |     |
+| l3 | n plus 1      |   |     | 100 |     |
+| l4 |               |   |     |     | 100 |
+
+or
+
+| l1 | N>=100 |
+| l2 |     |
+| l3 |     |
+| l4 | N |
+#+END_COMMENT
+# 5.
+#  (l1,1), (l2,1) (l3,2)
+#  (l1,99), (l2,99), (l3,100)
+#  (l1,100),(l4,100)
+# 6.
+# X1= 0,1,2,...; X2=0,...99;  X3=1,...100; X4=100,101...
+
+# 8. or 9
+#  (1) An integer overflow can only occur only at the x plus plus statement.
+#  (2) An integer overflow occurs for the statement if and only if the value of x is max_int
+
+
+
+
+# More to come
+# - Solve the invariant equation manually by iteration.
+# - Assuming that x is assigned to 1 immediately before l1. Do
+#    exercises 2 and 3 again.
+
+
+* Exercise 4
+page 4: Exercise a of https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
