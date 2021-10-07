@@ -39,7 +39,7 @@ end
 - What would be the analysis of an interval analysis?
 - Validate your results on http://pop-art.inrialpes.fr/interproc/interprocweb.cgi 
 
-* Exercise 3 (bis)
+* Exercise 4
 
 Consider the program
 #+BEGIN_SRC
@@ -66,11 +66,11 @@ l4 return x;}
 
    # simplified to
    #  X1 = [min_int, max_int]
-   #  X2 = X1 meet [min_int, 99]
-   #  X3 = X2 + 1
+   #  X2 = [min_int, 99]
+   #  X3 = [min_int+1,  100]
    #  X4 = [100, max_int]
    
 
 
-* Exercise 4
+* Exercise 5
 page 4: Exercise (a) from https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
