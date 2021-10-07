@@ -1,6 +1,7 @@
 * Exercise 1.
-Exercise 2 of https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
+Exercise 2 from https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
 
+# Assuming x = e is in the form of x = px + qy, we determiine the aboutt the final interval depending on signs of p and q
 * Exercise 2.
 Let S be the set of strings over a (finite) alphabet Σ. An abstraction
 of the string is the set of characters/symbols of which the string is
@@ -13,6 +14,8 @@ is indeed a Galois connection.
 
 Exercise adapted from
 https://proglang.informatik.uni-freiburg.de/teaching/programanalysis/2014ss/ex09.pdf)
+
+# done in class
 
 Exercise 3.
 Consider this program
@@ -35,7 +38,7 @@ end
 #+END_SRC 
 - What would be the possible values of "j" at the end of the program?
 - What would be the analysis of an interval analysis?
-- Validate your results on the web. 
+- Validate your results on http://pop-art.inrialpes.fr/interproc/interprocweb.cgi 
 
 * Exercise 3
 
@@ -105,4 +108,4 @@ or
 
 
 * Exercise 4
-page 4: Exercise a of https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
+page 4: Exercise (a) from https://lara.epfl.ch/w/_media/sav17:lecturecise10.pdf
