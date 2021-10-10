@@ -1,5 +1,5 @@
 * Exercise 1. [Concept of Boundary Inputs]
-- Please list two  boundary inputs for the following C program
+- List two  boundary inputs for the following C program
 #+BEGIN_SRC c
 void FOO (double x){
 a = x * x;
@@ -8,7 +8,7 @@ if (a < b) ...;
 }
 #+END_SRC
 
-- Can you list more than one boundary inputs for the Python program
+- List two boundary inputs for the Python program
   FOO below, in which the input "x" is a 64-bit floating-point number.
 #+BEGIN_SRC python
  def FOO(x):
@@ -25,10 +25,11 @@ number, "**" refers to the power operator.
 intuition, one may observe a the graph of f using Google, by
 copying the expression to the search engine.
 
--  Please  provide a small proof on f's minimum. Hint: First,
+-  Please  provide a proof on f's minimum. Hint: First,
    prove f(x)>=0, and then prove that f(x) can actually reach 0 for
    certain x.
--  Please also experiment with Python's scipy.optimize.minimize
+   
+-  Experiment with Python's scipy.optimize.minimize
    function to find the minimum of f automatically.  The interface of
    the Python function can be found at
    https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html
@@ -47,9 +48,8 @@ Your calculated minimum should be close to 0. If it is not the case,
 try to augment your iteration numbers (which is the "niter" parameter
 of scipy.optimize.basinhopping).
 
-To visualize the function, which is not necessary but can help you get
-some intuitions, you can also check the graph shown in Fig. 3 (a) of
-the paper http://zhoulaifu.com/wp-content/papercite-data/pdf/xsat.pdf
+To visualize the function, its graph is shown below: 
+[[./fig/exampleFunction_globalMinimum.png]]
 
 
 * Exercise 4. [Limitation of Local/Global Optimization]
