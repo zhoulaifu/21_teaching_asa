@@ -142,3 +142,12 @@ with i ranging from 1 to 10, and op_i being one of {<, <=, ==, !=, >=, >}.
 
 - What is a boundary input of the function FOO?
 - Write psuedo-code for automatically building a function R so that one can find FOO's boundary input through minimizing R.
+
+# inject r = 1 in the beginning of FOO  
+# for each "a op b" in FOO
+#    inject r = r * (a-b)**2 in
+# return y -> return r,y. IF no "return y" -> return r,
+# def R(x): r,a =FOO_I(x); return r
+
+
+
