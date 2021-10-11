@@ -141,4 +141,4 @@ if (a_i op_i b_i)
 with i ranging from 1 to 10, and op_i being one of {<, <=, ==, !=, >=, >}.
 
 - What is a boundary input of the function FOO?
-- Devise an algorithm for automatically building a function R so that one can find FOO's boundary input through minimizing R.
+- Write psuedo-code for automatically building a function R so that one can find FOO's boundary input through minimizing R.
