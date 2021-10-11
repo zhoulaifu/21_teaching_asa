@@ -8,6 +8,8 @@ if (a < b) ...;
 }
 #+END_SRC
 
+# Looking for x s.t. a=b
+# x^2 - x^4=0  <=> x^2 (x^2-1)=0 <=> x =0 or x = 1 or x= -1 
 - List two boundary inputs for the Python program
   FOO below, in which the input "x" is a 64-bit floating-point number.
 #+BEGIN_SRC python
@@ -17,6 +19,7 @@ if (a < b) ...;
         if y>=2: raise Exception ("UNEXPECTED! Input %.17f" %x)
 #+END_SRC python
 
+# x = 0.9999..
 * Exercise 2. [Local Optimization]
 Define the function f(x) as (x-1)**2 * (x-2)**2, where "x" is a double
 number, "**" refers to the power operator.
@@ -35,6 +38,11 @@ copying the expression to the search engine.
    https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html
    You probably need to install scipy. And, for your coding, you will
    need to provide an "initial guess" for the function's input.
+
+# def f(x): return (x-1)**2 * (x-2)**2
+# from scipy.optimize import minimize
+# minimize (f,0) and them minimize(f,4)
+
 
 * Exercise 3. [Global Optimization]
 Consider an artificial function g(x)= ((x - 1) ** 2 -4) ** 2 + f(x)
@@ -104,7 +112,7 @@ def R(x):
 
 * Exercise 6. [General Algorithm]
 Assume that a C function FOO has the interface
-
+a
 #+BEGIN_SRC C
 void FOO(double x)
 #+END_SRC C
