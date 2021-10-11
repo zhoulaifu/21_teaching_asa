@@ -52,7 +52,7 @@ otherwise.
 Find the function's global minimum with Python's
 scipy.optimize.basinhopping method. Its usage can be found at
 https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.basinhopping.html
-Your calculated minimum should be close to 0. If it is not the case,
+Your calculated minimum should be close to -1. If it is not the case,
 try to augment your iteration numbers (which is the "niter" parameter
 of scipy.optimize.basinhopping).
 
