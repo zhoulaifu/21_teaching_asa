@@ -29,13 +29,16 @@ intuition, one may observe a the graph of f using Google, by
 copying the expression to the search engine.
 
 -  Please  provide a proof on f's minimum. 
-   
+
+# Hint: First, prove f(x)>=0, and then prove that f(x) can actually reach 0 for certain x.  
 -  Experiment with Python's scipy.optimize.minimize
    function to find the minimum of f automatically.  The interface of
    the Python function can be found at
    https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html
    You probably need to install scipy. And, for your coding, you will
    need to provide an "initial guess" for the function's input.
+
+
 
 # def f(x): return (x-1)**2 * (x-2)**2
 # from scipy.optimize import minimize
