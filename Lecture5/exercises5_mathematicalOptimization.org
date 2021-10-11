@@ -113,7 +113,21 @@ def R(x):
    (the default iteration number of scipy.opitimize.basinhopping is
    niter=100 as shown in
    https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.basinhopping.html)
-   During the minimization procedure, you should see the exception raised
+   During the minimization procedure, you should see the exception raised.
+
+
+   Hint: Consider using the following code for global optimization:
+
+
+#+BEGIN_SRC python
+   def mcmc(func,  niter=50, start_point=0, method='powell'):
+    tol=1e-16
+    def callback_global(x,f,accepted):
+        conclusion= 'good!' if f<tol else "not good enough"
+        print("MCMC Sampling:: At x=%.10f,  f=%g,  ==> %s" % (x,f,  conclusion))
+
+    op.basinhopping(func,start_point,callback=callback_global,minimizer_kwargs={'method':'powell'},niter=niter)
+#+END_SRC     
 
 
 
