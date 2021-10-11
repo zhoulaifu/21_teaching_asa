@@ -113,10 +113,7 @@ def R(x):
    (the default iteration number of scipy.opitimize.basinhopping is
    niter=100 as shown in
    https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.basinhopping.html)
-   During the minimization procedure, you should see the exception raised.
-
-
-   Hint: Consider using the following code for global optimization:
+   During the minimization procedure, you should see the exception raised. Hint: Consider using the following code for global optimization:
 
 
 #+BEGIN_SRC python
