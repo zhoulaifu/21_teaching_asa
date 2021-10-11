@@ -99,16 +99,16 @@ subsequent “if (y >= 2)” will also be taken, which can be unexpected.
 The aim of this exercise is to automatically uncover such boundary
 inputs. Take the following step to achieve this:
 
-1. First, transform the program FOO to another program, denoted by R,
+- First, transform the program FOO to another program, denoted by R,
    in which you insert r = r * (x - 1) ** 2 and r = r * (y-2) ** 2
    before the two branches, and return the value of r in the end.
-2. Then, retrieve the value of "r" through the following code
+- Then, retrieve the value of "r" through the following code
 #+BEGIN_SRC python
 def R(x):
     r=FOO_I(x)
     return r
 #+END_SRC python
-3. Minimize R with scipy.optimize.basinhopping. Probably you will need
+- Minimize R with scipy.optimize.basinhopping. Probably you will need
    to provide an iteration number larger than the default one
    (the default iteration number of scipy.opitimize.basinhopping is
    niter=100 as shown in
