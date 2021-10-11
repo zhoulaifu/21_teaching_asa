@@ -60,6 +60,13 @@ To visualize the function, its graph is shown below:
 [[./fig/exampleFunction_globalMinimum.png]]
 
 
+#
+#
+# def g(x): return ((x - 1) ** 2 -4) ** 2 + f(x)
+# def f(x): return (x - 1.5) ** 2 if x > 1.5 else 0
+# from scipy.optimize import basinhopping
+# for example: basinhopping(g,1,niter=100,stepsize=10)
+
 * Exercise 4. [Limitation of Local/Global Optimization]
 
 Consider a characteristic function f(x) = 0 if x == 100, else 1. What
@@ -89,8 +96,8 @@ the branch “if (x < 1)” will be taken, but after "y = x + 1", the
 subsequent “if (y >= 2)” will also be taken, which can be unexpected.
 
 
-The aim of this exercise is to automatically cover such boundary
-inputs. You are suggested to take the following step:
+The aim of this exercise is to automatically uncover such boundary
+inputs. Take the following step to achieve this:
 
 1. First, transform the program FOO to another program, denoted by R,
    in which you insert r = r * (x - 1) ** 2 and r = r * (y-2) ** 2
