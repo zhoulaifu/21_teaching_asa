@@ -148,25 +148,52 @@ if __name__=="__main__":
 
 
 * Exercise 7 [Overflow detection]
-Computing the average of two numbers x and y directly with (x+y)/2 can
-have a floating-point overflow (which could be then exploited). Try to
-reproduce such an overflow with a weak-distance.
+Computing the average of two numbers x and y directly with (x+y)/2 can easily get to an overflow, which could be exploited. Some other implmentations, listed in av1, av2, av3, and av4 all could have overflow issues.
 
-You are to implement the function "wd" below. Running the code below,
-with a well-defined "wd" function, should help you find a pair of
-floating-point numbers such as (9e+307, 9e+307), noting that the
-largest floating-point number is about 1.79e+308 (which can be
-produced by "sys.float_info.max" in python's sys module).
+[[./fig/averageFunctions.png]]
 
+The average function Sterbenz proposed would work.  In this exercise,
+we target the av1 function and try to  automatically detect an overflow in it.
 
+- Manually provide x and y that produce an overflow in  av1. We disregard the case where x or y is inf (floating-point infinity) in this exercise.
+
+  Hint: The largest floating-point number is about 1.79e+308 (which can be
+produced by "sys.float_info.max" with python).
+
+The code below tries to construct R and minimize it.
+
+- Show that R constructed in this way vanishes if and only if av1 has an overflow issue
+- Run the program and check if the produced result indeed triggers an overflow. Perhaps the answer is negative. Then,
+- Modify the program so that an overflow can indeed be detected.     
+
+  
 #+BEGIN_SRC
+
+import sys
+import scipy.optimize as op
+import numpy as np
+MAX=sys.float_info.max
+
 def average(X):
      x=X[0]
      y=X[1]
-     ret = (x+y)/2.0
-     return wd(ret)
+     averageResult = (x+y)/2.0
+     return averageResult
 
+def average_I(X):
+     x=X[0]
+     y=X[1]
+     averageResult = (x+y)/2.0
+     r =  0 if averageResult>MAX else np.abs(averageResult - MAX)
+     return averageResult, r
+
+def R(X):
+     averageResult,r = average_I(X)
+     return r
+
+     
+# #################
 if __name__=="__main__":
 
-     print (op.basinhopping(average,[1,1], niter=100,stepsize=1e2, minimizer_kwargs={'method':'nelder-mead'}))
+     print (op.basinhopping(R,[1,1], niter=100,stepsize=1e2, minimizer_kwargs={'method':'nelder-mead'}))
 #+END_SRC
