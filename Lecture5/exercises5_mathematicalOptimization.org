@@ -148,6 +148,7 @@ with i ranging from 1 to 10, and op_i being one of {<, <=, ==, !=, >=, >}.
 # for each "a op b" in FOO
 #    inject r = r * (a-b)**2 in
 # return y -> return r,y. IF no "return y" -> return r,
+
 # def R(x): r,a =FOO_I(x); return r
 
 

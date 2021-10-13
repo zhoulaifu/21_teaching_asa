@@ -1,0 +1,172 @@
+* Exercise 1 [Concept of Satisfiability]
+Terminology: We say that a constraint c is _satisfiable_ in a _theory_ T if a _model_ m for the constraint exists. Identify  T and m in the following statements. 
+
+- a + b = 5 is satisfiable, where a and b are two integers.
+- a * a < 0 is unsatisfiable, where a is a real number. 
+- x < 1 /\ x + 1 == 2 is satisfiable, where x is a floating-point number, because the floating-point number 0.999 999 999 999 999 9 can be a solution to the constraint.
+- Is 2 ** x <= 5 satisfiable, where x is an real ? (** is for the power operator)
+
+* Exercise 2. [Microsoft Z3]
+Solve the following constraint with Microsoft Z3: https://rise4fun.com/z3/tutorial.
+#+BEGIN_SRC
+a * a = 3 and a >= 0
+#+END_SRC
+
+Some research is to be done to write a SMT-LIB specification of the
+  formula. You can get started with this one, which we used in the
+  class:
+
+#+BEGIN_SRC
+(declare-const x Real)
+(declare-const y Real)
+(declare-const z Real)
+(assert (=(-(+(* 3 x) (* 2 y)) z) 1))
+(assert (=(+(-(* 2 x) (* 2 y)) (* 4 z)) -2))
+(assert (=(-(+ (- 0 x) (* 0.5 y)) z) 0))
+(check-sat)
+(get-model)
+#+END_SRC
+
+
+
+* Exercise 3 [Beyond Z3 -- FP constraint solving via optimization]
+
+Consider the following constraint:
+#+BEGIN_SRC
+2 ** x <= 5 /\ x ** 2 >= 5 /\ x >= 0
+#+END_SRC
+where x is considered to be a floating-point number.
+
+- First, derive a mathematical function R(x) such that R(x)=0 if and
+  only if x is a model to the constraint.
+- Then, minimize R using scipy.optimize.basinhopping, which you should
+  be familiar with through the previous exercise.
+
+  Hint: you may consider using this piece of code when it comes to
+  minimze R.
+  
+#+BEGIN_SRC
+import numpy as np
+import scipy.optimize as op
+
+def mcmc(func, start_point=0, niter=500,method='powell'):
+    tol=1e-16
+    def callback_global(x,f,accepted):
+        conclusion= 'good!' if f<tol else "not good enough"
+        print("MCMC Sampling:: At x=%.10f,  f=%g,  ==> %s" % (x,f,  conclusion))
+    op.basinhopping(func,start_point,callback=callback_global,minimizer_kwargs={'method':'powell'},niter=niter,stepsize=10)
+#+END_SRC
+
+
+- At last, try to solve it with Microsoft Z3. Compare the results with
+  above.
+
+  Hint: To encode the operator of power above, namely "**", you may
+  refer to an example here:
+  https://stackoverflow.com/questions/30328888/use-z3-and-smt-lib-to-define-sqrt-function-with-a-real-number.
+
+
+* Exercise 4 [Concept of Problem Reduction]
+
+Problem reduction is a common term in computability theory. Simply
+speaking, a problem A reduces to a problem B if solving B allows for a
+solving A. Below are some possible problem reduction cases.
+
+
+- Let f be a scalar function whose output is a real number. Suppose
+  that we have a tool for finding the minimum of any function, can we
+  use the same tool to find the maximum of "f"?
+
+- Suppose that we have a local opitmization implementation that
+  calculates a local minimum from a starting point for an arbitrary
+  function f(double x). Is it possible to use the one to also get the
+  global minimum of any function? (this exo has a trap)
+
+- Suppose that we have a solver that determines satisfiability for all
+  floating-point constraints involving <=, ==, logic AND, and logic
+  OR. Can we use the same solver to solve an arbitrary floating-point
+  constraint involving "<", "!=", and ">" ?
+  
+  Hint: Consider to use numpy.nextafter to deal with "<". https://numpy.org/doc/stable/reference/generated/numpy.nextafter.html
+
+* Exercise 1 [Principles for constructing a weak-distance]
+
+For solving satisfiability of a constraint  c_1 AND c_2, we constructed R as R_1 + R_2 where each R_i corresponds to c_i. Alternatively, we can also construct R as:  R(x) = max (R1(x),
+R2(x)), where "max" takes two inputs and returns the larger
+number. (1) Justify this way of constructing R.  (2) Provide an alternative way to construct R for a constraint c_1 OR c_2.
+
+
+* Exercise 5 [An implicit condition for constructing the weak distance]
+
+Consider the constraint x * x = 4, and the two following weak
+distances for the constraint:
+
+- R_try1 is abs (x * x - 4)
+
+- R_try2 is 0 if x * x == 4 or 1 otherwise.
+
+Try to solve the constraints, using scipy.optimize.basinhopping with
+R_try1 and R_try2.
+
+* Exercise 6 [Path reachability]
+Try to solve the path reachability problem illustrated in our lecture by constructing a weak distance. You can fill in "put your implementation here" in the python code below and then run it.
+
+
+#+BEGIN_SRC
+import numpy as np
+import scipy.optimize as op
+
+def mcmc(func, start_point=0, niter=10,method='powell'):
+    tol=1e-10
+    def callback_global(x,f,accepted):
+        conclusion= 'good!' if f<tol else "not good enough"
+        print("MCMC Sampling:: At x=%.10f,  f=%g,  ==> %s" % (x,f,  conclusion))
+    op.basinhopping(func,start_point,callback=callback_global,minimizer_kwargs={'method':method},niter=niter,stepsize=20)
+
+def square(x): return x*x
+
+def FOO(x):
+    if x <= 1.0:
+        x = x + 1
+
+    y = square(x)
+    if y == 4.0:
+        x = x - 1
+
+def weak_distance(x):
+    # put your implementation here
+    return 0
+
+if __name__=="__main__":
+
+    mcmc(weak_distance)
+#+END_SRC
+
+
+
+
+
+
+* Exercise 7 [Overflow detection]
+Computing the average of two numbers x and y directly with (x+y)/2 can
+have a floating-point overflow (which could be then exploited). Try to
+reproduce such an overflow with a weak-distance.
+
+You are to implement the function "wd" below. Running the code below,
+with a well-defined "wd" function, should help you find a pair of
+floating-point numbers such as (9e+307, 9e+307), noting that the
+largest floating-point number is about 1.79e+308 (which can be
+produced by "sys.float_info.max" in python's sys module).
+
+
+#+BEGIN_SRC
+def average(X):
+     x=X[0]
+     y=X[1]
+     ret = (x+y)/2.0
+     return wd(ret)
+
+if __name__=="__main__":
+
+     print (op.basinhopping(average,[1,1], niter=100,stepsize=1e2, minimizer_kwargs={'method':'nelder-mead'}))
+#+END_SRC
