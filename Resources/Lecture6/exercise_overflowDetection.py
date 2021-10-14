@@ -13,7 +13,8 @@ def average_I(X):
      x=X[0]
      y=X[1]
      averageResult = (x+y)/2.0
-     r =  0 if averageResult>MAX else np.abs(averageResult - MAX)
+     #r =  0 if averageResult>MAX else np.abs(averageResult - MAX)
+     r = 0  if averageResult > MAX else np.abs(np.log(averageResult)-np.log(MAX))     
      return averageResult, r
 
 def R(X):

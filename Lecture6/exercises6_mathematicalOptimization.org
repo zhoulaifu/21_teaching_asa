@@ -89,14 +89,14 @@ solving A. Below are some possible problem reduction cases.
   
   Hint: Consider to use numpy.nextafter to deal with "<". https://numpy.org/doc/stable/reference/generated/numpy.nextafter.html
 
-* Exercise 1 [Principles for constructing a weak-distance]
+* Exercise 5 [Principles for constructing a weak-distance]
 
 For solving satisfiability of a constraint  c_1 AND c_2, we constructed R as R_1 + R_2 where each R_i corresponds to c_i. Alternatively, we can also construct R as:  R(x) = max (R1(x),
 R2(x)), where "max" takes two inputs and returns the larger
 number. (1) Justify this way of constructing R.  (2) Provide an alternative way to construct R for a constraint c_1 OR c_2.
 
 
-* Exercise 5 [An implicit condition for constructing the weak distance]
+* Exercise 6 [An implicit condition for constructing the weak distance]
 
 Consider the constraint x * x = 4, and the two following weak
 distances for the constraint:
@@ -108,7 +108,7 @@ distances for the constraint:
 Try to solve the constraints, using scipy.optimize.basinhopping with
 R_try1 and R_try2.
 
-* Exercise 6 [Path reachability]
+* Exercise 7 [Path reachability]
 Try to solve the path reachability problem illustrated in our lecture by constructing a weak distance. You can fill in "put your implementation here" in the python code below and then run it.
 
 
@@ -147,13 +147,18 @@ if __name__=="__main__":
 
 
 
-* Exercise 7 [Overflow detection]
+* Exercise 8 [Overflow detection]
 Computing the average of two numbers x and y directly with (x+y)/2 can easily get to an overflow, which could be exploited. Some other implmentations, listed in av1, av2, av3, and av4 all could have overflow issues.
 
 [[./fig/averageFunctions.png]]
 
-The average function Sterbenz proposed would work.  In this exercise,
-we target the av1 function and try to  automatically detect an overflow in it.
+The average function Sterbenz proposed does not have overflow [*]. 
+
+[*] (Related work) Barr ET, Vo T, Le V, Su Z. Automatic detection of floating-point exceptions. ACM Sigplan Notices. 2013 Jan 23;48(1):549-60.
+
+
+In this exercise, we target the av1 function and try to automatically
+detect an overflow in it.
 
 - Manually provide x and y that produce an overflow in  av1. We disregard the case where x or y is inf (floating-point infinity) in this exercise.
 
